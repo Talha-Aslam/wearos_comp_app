@@ -9,7 +9,6 @@ A unified Flutter application that intelligently adapts to both **Android phones
 <div align="center">
   <img src="screenshots/mobile/mobile_home.png" alt="Mobile Home Screen" width="300"/>
     <img src="screenshots/mobile/mobile_messages.png" alt="Mobile Messages" width="300"/>
-    <img src="screenshots/mobile/mobile_settings.png" alt="Mobile Settings" width="300"/>
 </div>
 
 *Replace the placeholder paths above with your actual screenshot files*
