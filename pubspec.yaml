@@ -1,7 +1,7 @@
-name: wearos_comp_app
-description: "A new Flutter project."
+name: universal_companion_app
+description: "A unified Flutter companion app for Android/WearOS and iOS/watchOS platforms with smart platform detection."
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.0
 
 environment:
   sdk: ^3.5.3
@@ -9,11 +9,22 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  watch_connectivity: ^0.2.1+1
-  google_fonts: ^6.1.0
-  flutter_animate: ^4.3.0
-  device_info_plus: ^10.1.0
-
+  # Cross-platform communication
+  watch_connectivity: ^0.2.1+1          # Android/WearOS communication
+  
+  # iOS/watchOS communication (will be configured)
+  # Note: iOS uses native WatchConnectivity framework
+  
+  # Platform detection
+  device_info_plus: ^10.1.0             # Device identification
+  
+  # UI & Design
+  google_fonts: ^6.1.0                  # Typography
+  flutter_animate: ^4.3.0               # Animations
+  
+  # iOS-specific dependencies (when needed)
+  # cupertino_icons: ^1.0.6             # iOS icons
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

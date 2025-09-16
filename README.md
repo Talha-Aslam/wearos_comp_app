@@ -1,53 +1,67 @@
-# 📱⌚ WearOS Companion App POC
+# 📱⌚ Universal Companion App
 
-A unified Flutter application that intelligently adapts to both **Android phones** and **Wear OS watches**, providing seamless cross-device communication and optimized user experiences for each platform.
+A unified Flutter application that intelligently adapts to **Android phones**, **Wear OS watches**, **iOS devices**, and **watchOS (Apple Watch)**, providing seamless cross-device communication and optimized user experiences for each platform.
 
 ## 📸 Screenshots
 
-### 📱 Mobile App
-<!-- Paste your Android phone screenshots here -->
+### 📱 Mobile Apps
+<!-- Paste your Android and iOS phone screenshots here -->
 <div align="center">
-  <img src="screenshots/mobile/mobile_home.png" alt="Mobile Home Screen" width="300"/>
-    <img src="screenshots/mobile/mobile_messages.png" alt="Mobile Messages" width="300"/>
+  <img src="screenshots/mobile/mobile_home.png" alt="Android Home Screen" width="300"/>
+  <img src="screenshots/mobile/mobile_messages.png" alt="Android Messages" width="300"/>
+  <img src="screenshots/mobile/ios_home.png" alt="iOS Home Screen" width="300"/>
 </div>
 
+*Replace the placeholder paths above with your actual screenshot files*
 
-### ⌚ Wear OS App
-<!-- Paste your Wear OS watch screenshots here -->
+### ⌚ Watch Apps  
+<!-- Paste your Wear OS and watchOS screenshots here -->
 <div align="center">
-  <img src="screenshots/wear/wear_home.png" alt="Wear Home Screen" width="250"/>
-    <img src="screenshots/wear/wear_messages.png" alt="Wear Messages" width="250"/>
-    <img src="screenshots/wear/wear_compact.png" alt="Wear Compact UI" width="250"/>
+  <img src="screenshots/wear/wear_home.png" alt="Wear OS Home" width="250"/>
+  <img src="screenshots/wear/wear_messages.png" alt="Wear OS Messages" width="250"/>
+  <img src="screenshots/wear/watchos_home.png" alt="watchOS Home" width="250"/>
 </div>
+
+*Replace the placeholder paths above with your actual screenshot files*
 
 
 ## 🌟 Features
 
 ### 🎯 **Smart Platform Detection**
-- Automatically detects device type (phone vs watch)
+- Automatically detects device type (Android/iOS phones vs Wear OS/watchOS watches)
 - Loads appropriate UI variant without user intervention
 - Uses device characteristics and model identifiers
-- Supports emulators and physical devices
+- Supports emulators and physical devices across all platforms
 
-### 📱 **Mobile Experience**
-- Full-featured phone interface
-- Companion watch management
-- Rich UI with animations and transitions
-- Message history and device status
-- Connection monitoring and diagnostics
+### 📱 **Mobile Experience (Android & iOS)**
+- **Android**: Material Design 3 with native Android patterns
+- **iOS**: Cupertino Design with native iOS look and feel
+- Full-featured phone interface with companion watch management
+- Rich UI with animations and platform-specific transitions
+- Message history and device status monitoring
+- Cross-platform communication capabilities
 
-### ⌚ **Wear OS Experience**
-- Compact circular-optimized design
-- Touch-friendly interface for small screens
-- Quick actions and shortcuts
+### ⌚ **Watch Experience (Wear OS & watchOS)**
+- **Wear OS**: Compact circular-optimized Material Design
+- **watchOS**: Dark-themed Apple Watch optimized interface
+- Touch-friendly interface designed for small circular screens
+- Quick actions and predefined message shortcuts
 - Battery-efficient operations
-- Native Wear OS integration
+- Platform-native integration (Wear OS/watchOS)
 
-### 🔄 **Cross-Device Communication**
-- Real-time message passing between phone and watch
-- Bidirectional data synchronization
-- Connection state management
-- Automatic reconnection handling
+### 🔄 **Cross-Platform Communication**
+- Real-time message passing between phones and watches
+- **Android ↔ Wear OS**: Using WatchConnectivity plugin
+- **iOS ↔ watchOS**: Using Apple's WatchConnectivity framework
+- Bidirectional data synchronization across all platforms
+- Connection state management and automatic reconnection
+- Message queuing and delivery confirmation
+
+### 🏪 **Universal App Store Deployment**
+- **Android**: Single Play Store listing with automatic Wear OS delivery
+- **iOS**: Single App Store listing with automatic Apple Watch delivery  
+- Professional bundling like major apps (Spotify, Google Fit, WhatsApp)
+- No manual watch installation required on either platform
 - Message queuing and delivery confirmation
 
 ### 🏪 **Single App Store Deployment**
@@ -61,57 +75,99 @@ A unified Flutter application that intelligently adapts to both **Android phones
 ### 📁 **Project Structure**
 ```
 lib/
-├── main.dart                 # Smart platform detection & routing
-├── main_mobile.dart         # Mobile app entrypoint
-├── main_wear.dart          # Wear OS app entrypoint
+├── main.dart                    # Smart 4-platform detection & routing
+├── main_mobile.dart            # Android mobile app entrypoint
+├── main_wear.dart              # Wear OS app entrypoint  
+├── main_ios.dart               # iOS mobile app entrypoint
+├── main_watchos.dart           # watchOS app entrypoint
 ├── mobile/
 │   └── screens/
-│       └── home_screen.dart # Mobile UI screens
+│       └── home_screen.dart    # Android Material Design UI
 ├── wear/
 │   └── screens/
-│       └── home_screen.dart # Wear OS UI screens
+│       └── home_screen.dart    # Wear OS compact UI
+├── ios/
+│   └── screens/
+│       └── ios_home_screen.dart    # iOS Cupertino Design UI
+├── watchos/
+│   └── screens/
+│       └── watchos_home_screen.dart # watchOS compact UI
 └── shared/
     ├── models/
-    │   ├── app_message.dart    # Message data models
-    │   └── device_info.dart    # Device information models
+    │   ├── app_message.dart        # Cross-platform message models
+    │   └── device_info.dart        # Device detection models
     ├── services/
-    │   ├── communication_service.dart  # Cross-device messaging
-    │   └── device_service.dart        # Device detection utilities
+    │   ├── communication_service.dart  # Universal messaging service
+    │   └── device_service.dart         # Platform detection service
     └── utils/
-        └── constants.dart      # App constants and configurations
+        └── constants.dart          # App constants and configurations
 ```
 
 ### 🧠 **Smart Routing System**
 The app uses intelligent platform detection to automatically load the correct interface:
 
 ```dart
-// Automatic platform detection in main.dart
-Future<bool> _detectWearDevice() async {
-  // Analyzes device model, brand, and product identifiers
-  // Returns true for Wear OS devices, false for mobile
+enum PlatformType {
+  android,    // Android phones
+  wearOS,     // Wear OS watches  
+  iOS,        // iPhones/iPads
+  watchOS,    // Apple Watches
+}
+
+// Automatic 4-platform detection in main.dart
+Future<PlatformType> _detectPlatformType() async {
+  // Analyzes device characteristics across all platforms
+  // Returns appropriate platform type for smart routing
 }
 
 void main() async {
-  final isWearDevice = await _detectWearDevice();
+  final platformType = await _detectPlatformType();
   
-  if (isWearDevice) {
-    wear.main(); // Load Wear OS app
-  } else {
-    mobile.main(); // Load mobile app
+  switch (platformType) {
+    case PlatformType.wearOS:
+      wear.main();     // Load Wear OS app
+      break;
+    case PlatformType.watchOS:
+      watchos.main();  // Load watchOS app
+      break;
+    case PlatformType.iOS:
+      ios.main();      // Load iOS app
+      break;
+    case PlatformType.android:
+    default:
+      mobile.main();   // Load Android app
   }
 }
 ```
 
 ### 🔗 **Communication Layer**
-Utilizes the `watch_connectivity` plugin for seamless device-to-device messaging:
+Utilizes universal communication plugins for cross-platform messaging:
 
 ```dart
 class CommunicationService {
   // Singleton pattern for global access
+  // Works across Android/Wear OS and iOS/watchOS
   // Stream-based message handling
-  // Connection state management
-  // Automatic retry mechanisms
+  // Platform-agnostic connection management
+  // Automatic retry mechanisms for all platforms
 }
+```
+
+### 🎨 **Platform-Specific Themes**
+Each platform gets its native look and feel:
+
+```dart
+// Android: Material Design 3
+ThemeData materialTheme = ThemeData(useMaterial3: true);
+
+// Wear OS: Compact Material Design  
+ThemeData wearTheme = ThemeData.dark();
+
+// iOS: Cupertino Design
+ThemeData iosTheme = CupertinoTheme.of(context);
+
+// watchOS: Dark Cupertino optimized for OLED
+ThemeData watchosTheme = ThemeData.dark().copyWith(...);
 ```
 
 ## 🚀 Getting Started
