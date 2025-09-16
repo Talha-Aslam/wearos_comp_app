@@ -7,9 +7,9 @@ A unified Flutter application that intelligently adapts to both **Android phones
 ### 📱 Mobile App
 <!-- Paste your Android phone screenshots here -->
 <div align="center">
-  <img src="screenshots/mobile_home.png" alt="Mobile Home Screen" width="300"/>
-  <img src="screenshots/mobile_messages.png" alt="Mobile Messages" width="300"/>
-  <img src="screenshots/mobile_settings.png" alt="Mobile Settings" width="300"/>
+  <img src="screenshots/mobile/mobile_home.png" alt="Mobile Home Screen" width="300"/>
+    <img src="screenshots/mobile/mobile_messages.png" alt="Mobile Messages" width="300"/>
+    <img src="screenshots/mobile/mobile_settings.png" alt="Mobile Settings" width="300"/>
 </div>
 
 *Replace the placeholder paths above with your actual screenshot files*
@@ -17,9 +17,9 @@ A unified Flutter application that intelligently adapts to both **Android phones
 ### ⌚ Wear OS App
 <!-- Paste your Wear OS watch screenshots here -->
 <div align="center">
-  <img src="screenshots/wear_home.png" alt="Wear Home Screen" width="250"/>
-  <img src="screenshots/wear_messages.png" alt="Wear Messages" width="250"/>
-  <img src="screenshots/wear_compact.png" alt="Wear Compact UI" width="250"/>
+  <img src="screenshots/wear/wear_home.png" alt="Wear Home Screen" width="250"/>
+    <img src="screenshots/wear/wear_messages.png" alt="Wear Messages" width="250"/>
+    <img src="screenshots/wear/wear_compact.png" alt="Wear Compact UI" width="250"/>
 </div>
 
 *Replace the placeholder paths above with your actual screenshot files*
