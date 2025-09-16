@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:watch_connectivity/watch_connectivity.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:watch_connectivity/watch_connectivity.dart';
+import 'shared/services/communication_service.dart';
+import 'shared/services/device_service.dart';
+import 'shared/utils/app_theme.dart';
+import 'wear/screens/home_screen.dart';
 
-void main() => runApp(const WearOSApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize services
+  await DeviceService().initialize();
+  await CommunicationService().initialize();
+
+  runApp(const WearOSApp());
+}
 
 class WearOSApp extends StatelessWidget {
   const WearOSApp({super.key});
@@ -11,17 +23,12 @@ class WearOSApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Wear OS Companion',
+      title: 'WearOS Companion',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6366F1),
-          brightness: Brightness.dark,
-        ),
-        textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
+      theme: AppTheme.darkTheme(
+        GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
       ),
-      home: const WatchHomeScreen(),
+      home: const WearHomeScreen(),
     );
   }
 }
@@ -80,24 +87,24 @@ class _WatchHomeScreenState extends State<WatchHomeScreen>
     try {
       // Check if watch connectivity is supported
       _isSupported = await _wc.isSupported;
-      print('Watch connectivity supported: $_isSupported');
+      debugPrint('Watch connectivity supported: $_isSupported');
 
       if (_isSupported) {
         // Check if devices are paired
         _isPaired = await _wc.isPaired;
-        print('Devices paired: $_isPaired');
+        debugPrint('Devices paired: $_isPaired');
 
         if (_isPaired) {
           // Check if phone is reachable
           _isReachable = await _wc.isReachable;
-          print('Phone reachable: $_isReachable');
+          debugPrint('Phone reachable: $_isReachable');
         }
       }
 
       // Listen for messages from phone
       _wc.messageStream.listen(
         (message) {
-          print('Received message from phone: $message');
+          debugPrint('Received message from phone: $message');
           setState(() {
             _lastMessage =
                 message['msg']?.toString() ?? 'Message received from phone';
@@ -117,7 +124,7 @@ class _WatchHomeScreenState extends State<WatchHomeScreen>
           }
         },
         onError: (error) {
-          print('Message stream error: $error');
+          debugPrint('Message stream error: $error');
           setState(() {
             _isConnected = false;
           });
@@ -139,7 +146,7 @@ class _WatchHomeScreenState extends State<WatchHomeScreen>
         _sendInitialPing();
       }
     } catch (e) {
-      print('Error initializing watch connectivity: $e');
+      debugPrint('Error initializing watch connectivity: $e');
       setState(() {
         _isConnected = false;
       });
@@ -154,9 +161,9 @@ class _WatchHomeScreenState extends State<WatchHomeScreen>
         'timestamp': DateTime.now().millisecondsSinceEpoch,
         'sender': 'watch',
       });
-      print('Initial ping sent to phone');
+      debugPrint('Initial ping sent to phone');
     } catch (e) {
-      print('Failed to send initial ping: $e');
+      debugPrint('Failed to send initial ping: $e');
     }
   }
 
@@ -168,9 +175,9 @@ class _WatchHomeScreenState extends State<WatchHomeScreen>
         'timestamp': DateTime.now().millisecondsSinceEpoch,
         'sender': 'watch',
       });
-      print('Auto-response sent to phone');
+      debugPrint('Auto-response sent to phone');
     } catch (e) {
-      print('Failed to send auto-response: $e');
+      debugPrint('Failed to send auto-response: $e');
     }
   }
 
@@ -193,7 +200,7 @@ class _WatchHomeScreenState extends State<WatchHomeScreen>
       };
 
       await _wc.sendMessage(message);
-      print('Message sent to phone: $message');
+      debugPrint('Message sent to phone: $message');
 
       // Wait a bit for potential response
       await Future.delayed(const Duration(milliseconds: 500));
@@ -225,7 +232,7 @@ class _WatchHomeScreenState extends State<WatchHomeScreen>
         );
       }
     } catch (e) {
-      print('Error sending message: $e');
+      debugPrint('Error sending message: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -418,7 +425,7 @@ class _WatchHomeScreenState extends State<WatchHomeScreen>
                   width: 1,
                 ),
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.smartphone,
                 color: Colors.white,
                 size: 16,

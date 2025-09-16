@@ -7,7 +7,7 @@ plugins {
 android {
     namespace = "com.example.wearos_comp_app"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -20,7 +20,7 @@ android {
 
     java {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(21))
+            languageVersion.set(JavaLanguageVersion.of(17))
         }
     }
 
@@ -44,5 +44,6 @@ flutter {
 }
 
 dependencies {
+    wearApp project(':wear')
     implementation 'com.google.android.gms:play-services-wearable:19.0.0'
 }

@@ -12,6 +12,7 @@ dependencies:
   watch_connectivity: ^0.2.1+1
   google_fonts: ^6.1.0
   flutter_animate: ^4.3.0
+  device_info_plus: ^10.1.0
 
 dev_dependencies:
   flutter_test:

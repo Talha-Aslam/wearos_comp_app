@@ -1,8 +1,14 @@
-<resources>
-
-    <style name="MainActivityTheme.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@android:color/black</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>
-        <item name="postSplashScreenTheme">@android:style/Theme.DeviceDefault</item>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Theme applied to the Android Application as a whole. -->
+    <!-- In particular, this impacts the splash screen. -->
+    <style name="LaunchTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <!-- Show a splash screen on the activity. Automatically removed when
+             the Flutter engine is started. -->
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+    <!-- Theme applied to the Activity as soon as the OS starts the app and
+         before Flutter has initialized. -->
+    <style name="NormalTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <item name="android:windowBackground">?android:colorBackground</item>
     </style>
 </resources>
