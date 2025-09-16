@@ -1,4 +1,4 @@
-# 📱⌚ WearOS Companion App
+# 📱⌚ WearOS Companion App POC
 
 A unified Flutter application that intelligently adapts to both **Android phones** and **Wear OS watches**, providing seamless cross-device communication and optimized user experiences for each platform.
 
@@ -11,7 +11,6 @@ A unified Flutter application that intelligently adapts to both **Android phones
     <img src="screenshots/mobile/mobile_messages.png" alt="Mobile Messages" width="300"/>
 </div>
 
-*Replace the placeholder paths above with your actual screenshot files*
 
 ### ⌚ Wear OS App
 <!-- Paste your Wear OS watch screenshots here -->
@@ -21,7 +20,6 @@ A unified Flutter application that intelligently adapts to both **Android phones
     <img src="screenshots/wear/wear_compact.png" alt="Wear Compact UI" width="250"/>
 </div>
 
-*Replace the placeholder paths above with your actual screenshot files*
 
 ## 🌟 Features
 
